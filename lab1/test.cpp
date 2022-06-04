@@ -111,7 +111,7 @@ TEST(ExactPatternMatching, KMP) {
             }
             duration = static_cast<double>(std::clock() - m_started) / CLOCKS_PER_SEC;
         }
-        ASSERT_EQ(response.result, compare_results[i]);
+        ASSERT_EQ(response.result + 1, compare_results[i]);
         f << fp[i < 4 ? 0 : 1] + "_" + std::to_string(i % 4 + 1) << ",Knuth–Morris–Pratt,"
         << std::to_string(duration) << "," << std::to_string(response.iter) << "\n";
     }
