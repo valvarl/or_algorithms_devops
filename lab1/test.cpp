@@ -50,7 +50,25 @@ std::vector<int> compare_results{8, 90, 900, 4000, 1057, 971, 2941, 17069};
 
 const int kRepeats = 1000;
 
-//TEST(ExactPatternMatching, Naive) {
+TEST(ExactPatternMatching, Naive) {
+    std::ofstream f("lab1/results.txt", std::ios::binary|std::ios::app);
+    for (size_t i = 0; i < texts.size(); ++i) {
+        Response response;
+        double duration;
+        {
+            std::clock_t m_started = clock();
+            for (int j = 0; j < kRepeats; ++j) {
+                response = naive(texts[i], words[i]);
+            }
+            duration = static_cast<double>(std::clock() - m_started) / CLOCKS_PER_SEC;
+        }
+        ASSERT_EQ(response.result, compare_results[i]);
+        f << fp[i < 4 ? 0 : 1] + "_" + std::to_string(i % 4 + 1) << ",Naive,"
+        << std::to_string(duration) << "," << std::to_string(response.iter) << "\n";
+    }
+}
+
+//TEST(ExactPatternMatching, RabinKarp) {
 //    std::ofstream f("lab1/results.txt", std::ios::binary|std::ios::app);
 //    for (size_t i = 0; i < texts.size(); ++i) {
 //        Response response;
@@ -58,48 +76,30 @@ const int kRepeats = 1000;
 //        {
 //            std::clock_t m_started = clock();
 //            for (int j = 0; j < kRepeats; ++j) {
-//                response = naive(texts[i], words[i]);
+//                response = rabin_karp(texts[i], words[i]);
 //            }
 //            duration = static_cast<double>(std::clock() - m_started) / CLOCKS_PER_SEC;
 //        }
 //        ASSERT_EQ(response.result, compare_results[i]);
-//        f << fp[i < 4 ? 0 : 1] + "_" + std::to_string(i % 4 + 1) << ",Naive,"
+//        f << fp[i < 4 ? 0 : 1] + "_" + std::to_string(i % 4 + 1) << ",Rabin-Karp,"
 //        << std::to_string(duration) << "," << std::to_string(response.iter) << "\n";
 //    }
 //}
-
-TEST(ExactPatternMatching, RabinKarp) {
-    std::ofstream f("lab1/results.txt", std::ios::binary|std::ios::app);
-    for (size_t i = 0; i < texts.size(); ++i) {
-        Response response;
-        double duration;
-        {
-            std::clock_t m_started = clock();
-            for (int j = 0; j < kRepeats; ++j) {
-                response = rabin_karp(texts[i], words[i]);
-            }
-            duration = static_cast<double>(std::clock() - m_started) / CLOCKS_PER_SEC;
-        }
-        ASSERT_EQ(response.result, compare_results[i]);
-        f << fp[i < 4 ? 0 : 1] + "_" + std::to_string(i % 4 + 1) << ",Rabin-Karp,"
-        << std::to_string(duration) << "," << std::to_string(response.iter) << "\n";
-    }
-}
-
-TEST(ExactPatternMatching, KMP) {
-    std::ofstream f("lab1/results.txt", std::ios::binary|std::ios::app);
-    for (size_t i = 0; i < texts.size(); ++i) {
-        Response response;
-        double duration;
-        {
-            std::clock_t m_started = clock();
-            for (int j = 0; j < kRepeats; ++j) {
-                response = kmp_matcher(texts[i], words[i]);
-            }
-            duration = static_cast<double>(std::clock() - m_started) / CLOCKS_PER_SEC;
-        }
-        ASSERT_EQ(response.result, compare_results[i]);
-        f << fp[i < 4 ? 0 : 1] + "_" + std::to_string(i % 4 + 1) << ",Knuth–Morris–Pratt,"
-        << std::to_string(duration) << "," << std::to_string(response.iter) << "\n";
-    }
-}
+//
+//TEST(ExactPatternMatching, KMP) {
+//    std::ofstream f("lab1/results.txt", std::ios::binary|std::ios::app);
+//    for (size_t i = 0; i < texts.size(); ++i) {
+//        Response response;
+//        double duration;
+//        {
+//            std::clock_t m_started = clock();
+//            for (int j = 0; j < kRepeats; ++j) {
+//                response = kmp_matcher(texts[i], words[i]);
+//            }
+//            duration = static_cast<double>(std::clock() - m_started) / CLOCKS_PER_SEC;
+//        }
+//        ASSERT_EQ(response.result, compare_results[i]);
+//        f << fp[i < 4 ? 0 : 1] + "_" + std::to_string(i % 4 + 1) << ",Knuth–Morris–Pratt,"
+//        << std::to_string(duration) << "," << std::to_string(response.iter) << "\n";
+//    }
+//}
