@@ -24,7 +24,7 @@ jobs:
   lint_test:
     runs-on: ubuntu-latest
     needs: on_commit
-    name: Code check
+    name: code_check
     steps:
       - uses: actions/checkout@v2
       - uses: ./myaction

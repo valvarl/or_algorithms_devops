@@ -1,5 +1,5 @@
-#ifndef OR_ALGORITHMS_KMP_H
-#define OR_ALGORITHMS_KMP_H
+#ifndef LAB1_KMP_H_
+#define LAB1_KMP_H_
 
 #include <vector>
 #include <string_view>
@@ -44,4 +44,4 @@ Response kmp_matcher(std::string_view text, std::string_view word) {
     return {result, iter};
 }
 
-#endif //OR_ALGORITHMS_KMP_H
+#endif  // LAB1_KMP_H_

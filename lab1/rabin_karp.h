@@ -1,6 +1,7 @@
-#ifndef OR_ALGORITHMS_RABIN_KARP_H
-#define OR_ALGORITHMS_RABIN_KARP_H
+#ifndef LAB1_RABIN_KARP_H_
+#define LAB1_RABIN_KARP_H_
 
+#include <string>
 #include <string_view>
 #include "utils.h"
 
@@ -48,4 +49,4 @@ rabin_karp(std::string text, std::string word, int d = 256, int q = 1283) {
     return {result, iter};
 }
 
-#endif //OR_ALGORITHMS_RABIN_KARP_H
+#endif  // LAB1_RABIN_KARP_H_

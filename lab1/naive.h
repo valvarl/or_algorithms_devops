@@ -1,5 +1,5 @@
-#ifndef OR_ALGORITHMS_NAIVE_H
-#define OR_ALGORITHMS_NAIVE_H
+#ifndef LAB1_NAIVE_H_
+#define LAB1_NAIVE_H_
 
 #include <string_view>
 #include "utils.h"
@@ -15,4 +15,4 @@ Response naive(std::string_view text, std::string_view word) {
     return {result, iter};
 }
 
-#endif //OR_ALGORITHMS_NAIVE_H
+#endif  // LAB1_NAIVE_H_

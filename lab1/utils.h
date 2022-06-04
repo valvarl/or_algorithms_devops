@@ -1,5 +1,5 @@
-#ifndef OR_ALGORITHMS_UTILS_H
-#define OR_ALGORITHMS_UTILS_H
+#ifndef LAB1_UTILS_H_
+#define LAB1_UTILS_H_
 
 bool inc(int *iter) {
     (*iter)++;
@@ -22,4 +22,4 @@ struct Response {
     int iter;
 };
 
-#endif //OR_ALGORITHMS_UTILS_H
+#endif  // LAB1_UTILS_H_
