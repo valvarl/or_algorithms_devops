@@ -3,6 +3,7 @@
 #include <utility>
 #include <vector>
 #include <ctime>
+#include <regex>
 #include <fstream>
 #include <gtest/gtest.h>
 
@@ -10,6 +11,18 @@
 #include "naive.h"
 #include "rabin_karp.h"
 #include "kmp.h"
+
+std::string ltrim(const std::string &s) {
+    return std::regex_replace(s, std::regex("^\\s+"), std::string(""));
+}
+
+std::string rtrim(const std::string &s) {
+    return std::regex_replace(s, std::regex("\\s+$"), std::string(""));
+}
+
+std::string trim(const std::string &s) {
+    return ltrim(rtrim(s));
+}
 
 std::pair<std::string, std::string> get_name(const std::string &text_path, const std::string &word_path) {
     std::ios_base::sync_with_stdio(false);
@@ -35,8 +48,8 @@ std::pair<std::vector<std::string>, std::vector<std::string>> load_benches() {
             auto text_path = s + "_t_" + std::to_string(i) + ".txt";
             auto word_path = s + "_w_" + std::to_string(i) + ".txt";
             auto pair = get_name(text_path, word_path);
-            texts.push_back(pair.first);
-            words.push_back(pair.second);
+            texts.push_back(trim(pair.first));
+            words.push_back(trim(pair.second));
         }
     }
     return std::make_pair(texts, words);
@@ -46,7 +59,7 @@ auto benches = load_benches();
 const auto texts = benches.first;
 const auto words = benches.second;
 
-std::vector<int> compare_results{8, 90, 900, 4000, 1057, 967, 2941, 17069};
+std::vector<int> compare_results{8, 90, 900, 4000, 1057, 967, 2939, 17069};
 
 const int kRepeats = 1000;
 
