@@ -41,8 +41,8 @@ jobs:
         shell: bash
         run: |
           sudo find -executable -type f -name "test_*" | bash
-          ls
           find . -name "results.txt" -print | zip results.zip -@
+          pwd
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
