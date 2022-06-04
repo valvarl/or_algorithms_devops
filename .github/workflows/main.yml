@@ -41,11 +41,12 @@ jobs:
         shell: bash
         run: |
           sudo find -executable -type f -name "test_*" | bash
+          ls
           find . -name "results.txt" -print | zip results.zip -@
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: artifact
-          path: ${{runner.workspace}}/build/artifact.zip
+          path: ${{runner.workspace}}/artifact.zip
           retention-days: 1
