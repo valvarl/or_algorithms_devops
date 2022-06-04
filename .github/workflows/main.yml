@@ -5,12 +5,12 @@ env:
   BUID_TYPE: Debug
 
 jobs:
-  lint_test:
-    runs-on: ubuntu-latest
-    name: Code check
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./myaction
+#  lint_test:
+#    runs-on: ubuntu-latest
+#    name: Code check
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: ./myaction
 
   build:
     runs-on: ubuntu-latest
@@ -18,7 +18,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Create Build Environment
-        run: cmake -E make_directory ${{runner.workspace}}/build
+        run: |
+          sudo apt install clang-13 --install-suggests
+          cmake -E make_directory ${{runner.workspace}}/build
         shell: bash
 
       - name: Configure Cmake
