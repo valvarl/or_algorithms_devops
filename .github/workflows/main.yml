@@ -1,5 +1,8 @@
 name: Lint test
-on: push
+on: [push]
+
+env:
+  BUID_TYPE: Debug
 
 jobs:
   lint_test:
@@ -8,3 +11,30 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./myaction
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create Build Environment
+        run: |
+             sudo apt update
+             sudo apt install clang-13
+             cmake -E make_directory ${{runner.workspace}}/build
+        shell: bash
+
+      - name: Configure Cmake
+        shell: bash
+        working-directory: ${{runner.workspace}}/build
+        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_COMPILER=/usr/bin/clang-++13
+
+      - name: Build
+        working-directory: ${{runner.workspace}}/build
+        shell: bash
+        run: cmake --build . --config $BUILD_TYPE
+
+      - name: Test
+        working-directory: ${{runner.workspace}}/build
+        shell: bash
+        run: ctest -C $BUILD_TYPE
