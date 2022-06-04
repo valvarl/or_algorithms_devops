@@ -8,7 +8,7 @@ for folder in $folders; do # Not recommended, will break on whitespace
       if [[ -d ${folder} ]]; then
         echo `pwd`
         echo `ls`
-        command="cpplint --recursive --linelength=120 --exclude=*/test.cpp ${folder}/*"
+        command="cpplint --recursive --linelength=120 --exclude=*/test.cpp --filter=-legal/copyright,-build/include_subdir ${folder}/*"
           echo "${command}"
           if ${command} | grep "error"; then
             echo "::error ::Review your code"
