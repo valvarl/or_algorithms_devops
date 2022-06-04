@@ -78,7 +78,7 @@ void write_test_result(size_t bench_num, const std::string& algorithm, size_t pr
 }
 
 const int kBenches = 7;
-const int kRepeats = 100'000;
+const int kRepeats = 100;
 std::shared_ptr<std::vector<bench>> benches = std::make_shared<std::vector<bench>>(load_benches(kBenches));
 
 TEST(KnapsackProblem, DP) {
@@ -106,30 +106,30 @@ TEST(KnapsackProblem, DP) {
     }
 }
 
-TEST(KnapsackProblem, TwoApproximation) {
-    for (int i = 0; i < kBenches; ++i) {
-        std::clock_t m_started = clock();
-        for (int j = 0; j < kRepeats; ++j) {
-            two_approx_backpack(std::get<1>(benches->at(i)), std::get<0>(benches->at(i)));
-        }
-        double duration = static_cast<double>(std::clock() - m_started) / CLOCKS_PER_SEC;
-
-        Response ta_solution = two_approx_backpack(std::get<1>(benches->at(i)), std::get<0>(benches->at(i)));
-        auto solution = ta_solution.result;
-        auto iter = ta_solution.iter;
-
-        auto backpack_info = get_backpack(std::get<1>(benches->at(i)), solution);
-        auto weight = std::get<0>(backpack_info), price = std::get<1>(backpack_info);
-
-        auto act_backpack_info = get_backpack(std::get<1>(benches->at(i)), std::get<2>(benches->at(i)));
-        auto act_weight = std::get<0>(backpack_info), act_price = std::get<1>(act_backpack_info);
-
-        EXPECT_EQ(price, act_price);
-        EXPECT_EQ(weight, act_weight);
-
-        write_test_result(i + 1, "2-Approx", price, weight, duration, iter);
-    }
-}
+//TEST(KnapsackProblem, TwoApproximation) {
+//    for (int i = 0; i < kBenches; ++i) {
+//        std::clock_t m_started = clock();
+//        for (int j = 0; j < kRepeats; ++j) {
+//            two_approx_backpack(std::get<1>(benches->at(i)), std::get<0>(benches->at(i)));
+//        }
+//        double duration = static_cast<double>(std::clock() - m_started) / CLOCKS_PER_SEC;
+//
+//        Response ta_solution = two_approx_backpack(std::get<1>(benches->at(i)), std::get<0>(benches->at(i)));
+//        auto solution = ta_solution.result;
+//        auto iter = ta_solution.iter;
+//
+//        auto backpack_info = get_backpack(std::get<1>(benches->at(i)), solution);
+//        auto weight = std::get<0>(backpack_info), price = std::get<1>(backpack_info);
+//
+//        auto act_backpack_info = get_backpack(std::get<1>(benches->at(i)), std::get<2>(benches->at(i)));
+//        auto act_weight = std::get<0>(backpack_info), act_price = std::get<1>(act_backpack_info);
+//
+//        EXPECT_EQ(price, act_price);
+//        EXPECT_EQ(weight, act_weight);
+//
+//        write_test_result(i + 1, "2-Approx", price, weight, duration, iter);
+//    }
+//}
 
 TEST(KnapsackProblem, FPTAS) {
     for (int i = 0; i < kBenches; ++i) {
