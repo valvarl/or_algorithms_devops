@@ -47,6 +47,6 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: artifact
-          path: ${{runner.workspace}}/artifact.zip
+          name: results
+          path: ${{runner.workspace}}/build/results.zip
           retention-days: 1
