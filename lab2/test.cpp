@@ -78,7 +78,7 @@ void write_test_result(size_t bench_num, const std::string& algorithm, size_t pr
 }
 
 const int kBenches = 7;
-const int kRepeats = 100;
+const int kRepeats = 100'000;
 
 TEST(KnapsackProblem, DP) {
     std::shared_ptr<std::vector<bench>> benches = std::make_shared<std::vector<bench>>(load_benches(kBenches));
@@ -136,9 +136,9 @@ TEST(KnapsackProblem, FPTAS) {
     std::shared_ptr<std::vector<bench>> benches = std::make_shared<std::vector<bench>>(load_benches(kBenches));
     for (int i = 0; i < kBenches; ++i) {
         std::clock_t m_started = clock();
-//        for (int j = 0; j < kRepeats; ++j) {
-//            fptas_backpack(std::get<1>(benches->at(i)), std::get<0>(benches->at(i)), 0.5);
-//        }
+        for (int j = 0; j < kRepeats; ++j) {
+            fptas_backpack(std::get<1>(benches->at(i)), std::get<0>(benches->at(i)), 0.5);
+        }
         double duration = static_cast<double>(std::clock() - m_started) / CLOCKS_PER_SEC;
 
         Response fptas_solution = fptas_backpack(std::get<1>(benches->at(i)), std::get<0>(benches->at(i)), 0.5);
