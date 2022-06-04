@@ -79,9 +79,9 @@ void write_test_result(size_t bench_num, const std::string& algorithm, size_t pr
 
 const int kBenches = 7;
 const int kRepeats = 100;
-std::shared_ptr<std::vector<bench>> benches = std::make_shared<std::vector<bench>>(load_benches(kBenches));
 
 TEST(KnapsackProblem, DP) {
+    std::shared_ptr<std::vector<bench>> benches = std::make_shared<std::vector<bench>>(load_benches(kBenches));
     for (int i = 0; i < kBenches; ++i) {
         std::clock_t m_started = clock();
         for (int j = 0; j < kRepeats; ++j) {
@@ -107,6 +107,7 @@ TEST(KnapsackProblem, DP) {
 }
 
 TEST(KnapsackProblem, TwoApproximation) {
+    std::shared_ptr<std::vector<bench>> benches = std::make_shared<std::vector<bench>>(load_benches(kBenches));
     for (int i = 0; i < kBenches; ++i) {
         std::clock_t m_started = clock();
 //        for (int j = 0; j < kRepeats; ++j) {
@@ -132,6 +133,7 @@ TEST(KnapsackProblem, TwoApproximation) {
 }
 
 TEST(KnapsackProblem, FPTAS) {
+    std::shared_ptr<std::vector<bench>> benches = std::make_shared<std::vector<bench>>(load_benches(kBenches));
     for (int i = 0; i < kBenches; ++i) {
         std::clock_t m_started = clock();
 //        for (int j = 0; j < kRepeats; ++j) {
@@ -157,6 +159,7 @@ TEST(KnapsackProblem, FPTAS) {
 }
 
 TEST(KnapsackProblem, BranchAndBound) {
+    std::shared_ptr<std::vector<bench>> benches = std::make_shared<std::vector<bench>>(load_benches(kBenches));
     for (int i = 0; i < kBenches; ++i) {
         std::clock_t m_started = clock();
         for (int j = 0; j < kRepeats; ++j) {
