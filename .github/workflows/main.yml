@@ -18,9 +18,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Create Build Environment
-        run: |
-          sudo apt install clang-13 --install-suggests
-          cmake -E make_directory ${{runner.workspace}}/build
+        run: cmake -E make_directory ${{runner.workspace}}/build
         shell: bash
 
       - name: Install Clang
