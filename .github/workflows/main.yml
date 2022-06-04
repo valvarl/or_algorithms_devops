@@ -48,16 +48,16 @@ jobs:
 
       - name: Configure Cmake
         shell: bash
-        working-directory: ${{runner.workspace}}/$BUILD_REP
+        working-directory: ${{runner.workspace}}/${{env.BUILD_REP}}
         run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_COMPILER=/usr/bin/clang++
 
       - name: Build
-        working-directory: ${{runner.workspace}}/$BUILD_REP
+        working-directory: ${{runner.workspace}}/${{env.BUILD_REP}}
         shell: bash
         run: cmake --build . --config $BUILD_TYPE
 
       - name: Test
-        working-directory: ${{runner.workspace}}/$BUILD_REP
+        working-directory: ${{runner.workspace}}/${{env.BUILD_REP}}
         shell: bash
         run: |
           sudo find -executable -type f -name "test_*" | bash
