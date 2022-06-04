@@ -84,5 +84,5 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: ${{ succeed() && 'The job has succeeded.' || 'The job has failed.' }}
+          message: ${{ success() && 'The job has succeeded.' || 'The job has failed.' }}
           document: results.zip
