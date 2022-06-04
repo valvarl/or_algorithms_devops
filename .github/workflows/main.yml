@@ -39,4 +39,13 @@ jobs:
       - name: Test
         working-directory: ${{runner.workspace}}/build
         shell: bash
-        run: sudo find -executable -type f -name "test_*" | bash
+        run: |
+          sudo find -executable -type f -name "test_*" | bash
+          find . -name "results.txt" -print | zip results.zip -@
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact
+          path: artifact.zip
+          retention-days: 1
