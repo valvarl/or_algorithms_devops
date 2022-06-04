@@ -59,7 +59,7 @@ auto benches = load_benches();
 const auto texts = benches.first;
 const auto words = benches.second;
 
-std::vector<int> compare_results{8, 90, 900, 4000, 1057, 967, 2939, 17069};
+std::vector<int> compare_results{8, 90, 900, 4000, 1057, 967, 2936, 17069};
 
 const int kRepeats = 1000;
 
