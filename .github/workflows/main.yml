@@ -23,6 +23,9 @@ jobs:
           cmake -E make_directory ${{runner.workspace}}/build
         shell: bash
 
+      - name: Install Clang
+        uses: egor-tensin/setup-clang@v1
+
       - name: Configure Cmake
         shell: bash
         working-directory: ${{runner.workspace}}/build
