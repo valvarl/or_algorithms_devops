@@ -4,10 +4,8 @@ folders=$(ls | grep -i "lab*")
 echo "${folders}"
 
 for folder in $folders; do # Not recommended, will break on whitespace
-    echo $folders
+    echo "${folder}"
       if [[ -d ${folder} ]]; then
-        echo `pwd`
-        echo `ls`
         command="cpplint --recursive --linelength=120 --exclude=*/test.cpp --filter=-legal/copyright,-build/include_subdir ${folder}/*"
           echo "${command}"
           if ${command} | grep "error"; then

@@ -76,13 +76,13 @@ class comp {
 };
 
 void
-assign(Node &node, float ub, float lb, int level, bool flag, float tv, float tw) {
-    node.ub = ub;
-    node.lb = lb;
-    node.level = level;
-    node.flag = flag;
-    node.tv = tv;
-    node.tw = tw;
+assign(Node *node, float ub, float lb, int level, bool flag, float tv, float tw) {
+    node->ub = ub;
+    node->lb = lb;
+    node->level = level;
+    node->flag = flag;
+    node->tv = tv;
+    node->tw = tw;
 }
 
 Response
@@ -150,7 +150,7 @@ Response
         // right node -> Excludes current item
         // Hence, cp, cw will obtain the value
         // of that of parent
-        assign(right, upper_bound(current.tv, current.tw, level + 1, data, index),
+        assign(&right, upper_bound(current.tv, current.tw, level + 1, data, index),
                lower_bound(current.tv, current.tw, level + 1, data, index),
                level + 1, false, current.tv, current.tw);
 
@@ -169,7 +169,7 @@ Response
                                   current.tw + static_cast<float>(data[index[level]].weight),
                                   level + 1, data, index);
 
-            assign(left, left.ub, left.lb, level + 1, true,
+            assign(&left, left.ub, left.lb, level + 1, true,
                    current.tv - static_cast<float>(data[index[level]].price),
                    current.tw + static_cast<float>(data[index[level]].weight));
         } else {  // If Left node cannot be inserted
