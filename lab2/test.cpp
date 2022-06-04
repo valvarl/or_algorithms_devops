@@ -109,9 +109,9 @@ TEST(KnapsackProblem, DP) {
 TEST(KnapsackProblem, TwoApproximation) {
     for (int i = 0; i < kBenches; ++i) {
         std::clock_t m_started = clock();
-        for (int j = 0; j < kRepeats; ++j) {
-            two_approx_backpack(std::get<1>(benches->at(i)), std::get<0>(benches->at(i)));
-        }
+//        for (int j = 0; j < kRepeats; ++j) {
+//            two_approx_backpack(std::get<1>(benches->at(i)), std::get<0>(benches->at(i)));
+//        }
         double duration = static_cast<double>(std::clock() - m_started) / CLOCKS_PER_SEC;
 
         Response ta_solution = two_approx_backpack(std::get<1>(benches->at(i)), std::get<0>(benches->at(i)));
