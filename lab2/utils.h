@@ -1,7 +1,8 @@
-#ifndef OR_ALGORITHMS_UTILS_H
-#define OR_ALGORITHMS_UTILS_H
+#ifndef LAB2_UTILS_H_
+#define LAB2_UTILS_H_
 
 #include <vector>
+#include <algorithm>
 
 struct Item {
     size_t weight = 0;
@@ -29,4 +30,4 @@ std::vector<size_t> descending_index(const std::vector<Item>& data) {
     return index;
 }
 
-#endif //OR_ALGORITHMS_UTILS_H
+#endif  // LAB2_UTILS_H_

@@ -1,5 +1,5 @@
-#ifndef OR_ALGORITHMS_DP_H
-#define OR_ALGORITHMS_DP_H
+#ifndef LAB2_DP_H_
+#define LAB2_DP_H_
 
 #include <vector>
 #include <algorithm>
@@ -31,4 +31,4 @@ Response dp_backpack(const std::vector<Item> &data, const size_t capacity) {
     return {result, iter};
 }
 
-#endif //OR_ALGORITHMS_DP_H
+#endif  // LAB2_DP_H_

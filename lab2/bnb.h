@@ -1,10 +1,10 @@
-#ifndef OR_ALGORITHMS_BNB_H
-#define OR_ALGORITHMS_BNB_H
+#ifndef LAB2_BNB_H_
+#define LAB2_BNB_H_
 
 #include <vector>
 #include <queue>
 #include <algorithm>
-#include <climits>
+#include <limits>
 
 // Stores the number of items
 int data_size;
@@ -13,7 +13,6 @@ int data_size;
 float w_capacity;
 
 typedef struct Node {
-
     // Upper Bound: Best case (Fractional Knapsack)
     float ub = 0;
 
@@ -70,8 +69,8 @@ float lower_bound(float tv, float tw, int idx, const std::vector<Item> &data,
 }
 
 class comp {
-public:
-    bool operator()(Node lhs, Node rhs) {
+ public:
+    bool operator()(const Node &lhs, const Node &rhs) {
         return lhs.lb > rhs.lb;
     }
 };
@@ -121,7 +120,6 @@ Response
         pq.pop();
 
         if (current.ub > min_lb || current.ub >= final_lb) {
-
             // If the current node's best case
             // value is not optimal than min_lb,
             // then there is no reason to explore
@@ -159,7 +157,6 @@ Response
         // Check whether adding the current
         // item will not exceed the knapsack weight
         if (current.tw + static_cast<float>(data[index[current.level]].weight) <= w_capacity) {
-
             // left node -> includes current item
             // c and lb should be calculated
             // including the current item.
@@ -175,11 +172,7 @@ Response
             assign(left, left.ub, left.lb, level + 1, true,
                    current.tv - static_cast<float>(data[index[level]].price),
                    current.tw + static_cast<float>(data[index[level]].weight));
-        }
-
-            // If Left node cannot be inserted
-        else {
-
+        } else {  // If Left node cannot be inserted
             // Stop the left node from
             // getting added to the
             // priority queue
@@ -194,7 +187,6 @@ Response
         // upper bound is greater than
         // min_lb will never give
         // the optimal result
-
         if (min_lb >= left.ub) {
             pq.push(left);
             iter++;
@@ -204,8 +196,7 @@ Response
             iter++;
         }
     }
-
     return {final_path, iter};
 }
 
-#endif //OR_ALGORITHMS_BNB_H
+#endif  // LAB2_BNB_H_
