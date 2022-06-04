@@ -80,7 +80,7 @@ jobs:
           name: results
 
       - name: send telegram message on push
-        if: ${{ succed() }}
+        if: ${{ success() }}
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
