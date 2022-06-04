@@ -20,7 +20,8 @@ jobs:
       - name: Create Build Environment
         run: |
              sudo apt update
-             sudo apt install clang-13
+             sudo wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+             sudo apt-get install clang-13
              cmake -E make_directory ${{runner.workspace}}/build
         shell: bash
 
