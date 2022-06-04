@@ -12,7 +12,7 @@ jobs:
 #      - uses: actions/checkout@v2
 #      - uses: ./myaction
 
-  build:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -42,7 +42,6 @@ jobs:
         run: |
           sudo find -executable -type f -name "test_*" | bash
           find . -name "results.txt" -print | zip results.zip -@
-          pwd
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
@@ -50,3 +49,26 @@ jobs:
           name: results
           path: ${{runner.workspace}}/build/results.zip
           retention-days: 1
+
+  telegram:
+    name: Send results via telegram
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts for build_and_test
+        uses: actions/download-artifact@v3
+        with:
+          name: results
+
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
