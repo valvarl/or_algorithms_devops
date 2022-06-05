@@ -10,7 +10,7 @@
 * Knuth–Morris–Pratt algorithm
   | <img src="https://render.githubusercontent.com/render/math?math=\Theta(n)">
 
-Benchmark results can be found [here](../or_algorithms_devops/lab1/README.md).
+Benchmark results can be found [here](lab1/README.md).
 
 ## 2. 0-1 knapsack problem
 
