@@ -1,0 +1,6 @@
+data,cost dependency,solution,best cost,"avg time, s"
+tai20a,tai20a.png,tai20a.png,721294,0.17917
+tai40a,tai40a.png,tai40a.png,3249224,4.65746
+tai60a,tai60a.png,tai60a.png,7456016,34.4535
+tai80a,tai80a.png,tai80a.png,13945912,148.286
+tai100a,tai100a.png,tai100a.png,21682094,420.453
