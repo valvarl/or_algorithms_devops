@@ -10,11 +10,11 @@
 
 
 class Graph {
-private:
+ private:
     int V;  // number of vertices
     int initial_vertex;  // initial vertex
     std::map<std::pair<int, int>, double> map_edges;  // map of the edges
-public:
+ public:
     Graph(int V, int initial_vertex);
 
     void addEdge(int v1, int v2, double weight);  // adds a edge
@@ -37,7 +37,7 @@ struct TCPResponse {
 };
 
 class Genetic {
-private:
+ private:
     Graph *graph;
     std::vector<my_pair> population;  // each element is a pair: vector and total cost
     int size_population;  // size of population
@@ -45,9 +45,9 @@ private:
     int generations;  // amount of generations
     int mutation_rate;  // mutation rate
     bool show_population;  // flag to show population
-private:
+ private:
     void initialPopulation();  // generates the initial population
-public:
+ public:
     Genetic(Graph *graph, int amount_population, int generations,
             int mutation_rate, bool show_population = true);  // constructor
     double isValidSolution(

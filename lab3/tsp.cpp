@@ -99,8 +99,8 @@ void Genetic::initialPopulation() {
 
     double total_cost = isValidSolution(parent);
 
-    if (total_cost != -1)  // checks if the parent is valid
-    {
+    if (total_cost != -1) {
+        // checks if the parent is valid
         population.emplace_back(parent, total_cost);  // inserts in the population
         real_size_population++;  // increments real_size_population
     }
@@ -128,8 +128,7 @@ void Genetic::initialPopulation() {
 
 void Genetic::showPopulation() {
     std::cout << "\nShowing solutions...\n\n";
-    for (auto & it : population)
-    {
+    for (auto & it : population) {
         const std::vector<int> &vec = it.first;  // gets the vector
 
         for (int i = 0; i < graph->V; i++)
@@ -152,10 +151,12 @@ void Genetic::insertBinarySearch(std::vector<int> &child, double total_cost) {
         if (total_cost == population[imid].second) {
             population.insert(population.begin() + imid, make_pair(child, total_cost));
             return;
-        } else if (total_cost > population[imid].second)
+        } else if (total_cost > population[imid].second) {
             imin = imid + 1;
-        else
+
+        } else {
             imax = imid - 1;
+        }
     }
     population.insert(population.begin() + imin, make_pair(child, total_cost));
 }
@@ -215,16 +216,16 @@ void Genetic::crossOver(std::vector<int> &parent1, std::vector<int> &parent2) {
     // child1 receives genes of the parent2 and
     // child2 receives genes of the parent1
     for (int i = point2; i >= point1; i--) {
-        if (genes1[parent2[i]] == 0)  // if the gene is not used
-        {
+        if (genes1[parent2[i]] == 0) {
+            // if the gene is not used
             child1.push_back(parent2[i]);
             genes1[parent2[i]] = 1;  // marks the gene
         } else {
             // if the gene already is used, chooses gene that is not used
             for (auto it = genes1.begin();
-                 it != genes1.end(); ++it) {
-                if (it->second == 0)  // checks if is not used
-                {
+                it != genes1.end(); ++it) {
+                if (it->second == 0) {
+                    // checks if is not used
                     child1.push_back(it->first);
                     genes1[it->first] = 1;  // marks as used
                     break;  // left the loop
@@ -232,16 +233,16 @@ void Genetic::crossOver(std::vector<int> &parent1, std::vector<int> &parent2) {
             }
         }
 
-        if (genes2[parent1[i]] == 0)  // if the gene is not used
-        {
+        if (genes2[parent1[i]] == 0) {
+            // if the gene is not used
             child2.push_back(parent1[i]);
             genes2[parent1[i]] = 1;  // marks the gene
         } else {
             // if the gene already is used, chooses gene that is not used
             for (auto it = genes2.begin();
                  it != genes2.end(); ++it) {
-                if (it->second == 0)  // checks if is not used
-                {
+                if (it->second == 0) {
+                    // checks if is not used
                     child2.push_back(it->first);
                     genes2[it->first] = 1;  // marks as used
                     break;  // left the loop
