@@ -1,7 +1,10 @@
-#ifndef OR_ALGORITHMS_ITERATED_LOCAL_SEARCH_H
-#define OR_ALGORITHMS_ITERATED_LOCAL_SEARCH_H
+#ifndef LAB4_ITERATED_LOCAL_SEARCH_H_
+#define LAB4_ITERATED_LOCAL_SEARCH_H_
 
 #include <random>
+#include <algorithm>
+#include <vector>
+#include <utility>
 
 #include "local_search.h"
 
@@ -10,7 +13,7 @@ std::vector<int> stochastic_k_opt(const std::vector<int> &permutation, const int
 
     std::vector<int> numbers;
     numbers.reserve(n);
-    for(int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i) {
         numbers.push_back(i);
     }
 
@@ -19,7 +22,7 @@ std::vector<int> stochastic_k_opt(const std::vector<int> &permutation, const int
     std::sort(numbers.begin(), std::next(numbers.begin(), 2 * k));
 
     auto new_perm = permutation;
-    for(int i = 0; i < 2 * k; i += 2) {
+    for (int i = 0; i < 2 * k; i += 2) {
         std::reverse(new_perm.begin() + numbers[i], new_perm.begin() + numbers[i + 1] + 1);
     }
 
@@ -48,4 +51,4 @@ LSResponse iterated_local_search(const int n, const matrix &md, const matrix &mf
     return {cost_track, permutation};
 }
 
-#endif //OR_ALGORITHMS_ITERATED_LOCAL_SEARCH_H
+#endif  // LAB4_ITERATED_LOCAL_SEARCH_H_

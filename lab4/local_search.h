@@ -1,10 +1,13 @@
-#ifndef OR_ALGORITHMS_LOCAL_SEARCH_H
-#define OR_ALGORITHMS_LOCAL_SEARCH_H
+#ifndef LAB4_LOCAL_SEARCH_H_
+#define LAB4_LOCAL_SEARCH_H_
 
 #include <algorithm>
 #include <random>
-#include <chrono>
+#include <chrono>  // NOLINT
 #include <climits>
+#include <vector>
+#include <limits>
+#include <utility>
 
 using matrix = std::vector<std::vector<int>>;
 
@@ -74,4 +77,4 @@ LSResponse local_search(const int n, const matrix &md, const matrix &mf) {
     return ls(permutation, md, mf);
 }
 
-#endif //OR_ALGORITHMS_LOCAL_SEARCH_H
+#endif  // LAB4_LOCAL_SEARCH_H_
