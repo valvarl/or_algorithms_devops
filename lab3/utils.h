@@ -1,5 +1,5 @@
-#ifndef OR_ALGORITHMS_UTILS_H
-#define OR_ALGORITHMS_UTILS_H
+#ifndef LAB3_UTILS_H_
+#define LAB3_UTILS_H_
 
 #include <vector>
 
@@ -9,4 +9,4 @@ struct Item {
     size_t amount = 0;
 };
 
-#endif //OR_ALGORITHMS_UTILS_H
+#endif  // LAB3_UTILS_H_

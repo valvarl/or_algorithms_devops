@@ -1,12 +1,12 @@
 #include <iostream>
-#include <algorithm> // sort, next_permutation
+#include <algorithm>  // sort, next_permutation
 #include <random>
 #include "tsp.h"
 
 
 Graph::Graph(int V, int initial_vertex) {
-    this->V = V; // assigns the number of vertices
-    this->initial_vertex = initial_vertex; // assigns initial vertex
+    this->V = V;  // assigns the number of vertices
+    this->initial_vertex = initial_vertex;  // assigns initial vertex
 }
 
 
@@ -18,7 +18,7 @@ double Graph::existsEdge(int src, int dest) {
     auto it = map_edges.find(std::make_pair(src, dest));
 
     if (it != map_edges.end()) {
-        return it->second; // returns cost
+        return it->second;  // returns cost
     }
     return -1;
 }
@@ -76,8 +76,8 @@ double Genetic::isValidSolution(std::vector<int> &solution) {
 bool Genetic::existsChromosome(const std::vector<int> &v) {
     // checks if exists in the population
     for (auto & it : population) {
-        const std::vector<int> &vec = it.first; // gets the vector
-        if (equal(v.begin(), v.end(), vec.begin())) // compares vectors
+        const std::vector<int> &vec = it.first;  // gets the vector
+        if (equal(v.begin(), v.end(), vec.begin()))  // compares vectors
             return true;
     }
     return false;
@@ -99,10 +99,10 @@ void Genetic::initialPopulation() {
 
     double total_cost = isValidSolution(parent);
 
-    if (total_cost != -1) // checks if the parent is valid
+    if (total_cost != -1)  // checks if the parent is valid
     {
-        population.emplace_back(parent, total_cost); // inserts in the population
-        real_size_population++; // increments real_size_population
+        population.emplace_back(parent, total_cost);  // inserts in the population
+        real_size_population++;  // increments real_size_population
     }
 
     // makes random permutations "generations" times
@@ -111,14 +111,14 @@ void Genetic::initialPopulation() {
         shuffle(parent.begin() + 1,
                        parent.begin() + (rand() % (graph->V - 1) + 1), std::mt19937(std::random_device()()));
 
-        total_cost = isValidSolution(parent); // checks if solution is valid
+        total_cost = isValidSolution(parent);  // checks if solution is valid
 
         // checks if permutation is a valid solution and if not exists
         if (total_cost != -1 && !existsChromosome(parent)) {
-            population.emplace_back(parent, total_cost); // add in population
-            real_size_population++; // increments real_size_population in the unit
+            population.emplace_back(parent, total_cost);  // add in population
+            real_size_population++;  // increments real_size_population in the unit
         }
-        if (real_size_population == size_population) // checks size population
+        if (real_size_population == size_population)  // checks size population
             break;
     }
 
@@ -130,7 +130,7 @@ void Genetic::showPopulation() {
     std::cout << "\nShowing solutions...\n\n";
     for (auto & it : population)
     {
-        const std::vector<int> &vec = it.first; // gets the vector
+        const std::vector<int> &vec = it.first;  // gets the vector
 
         for (int i = 0; i < graph->V; i++)
             std::cout << vec[i] << " ";
@@ -184,7 +184,7 @@ void Genetic::crossOver(std::vector<int> &parent1, std::vector<int> &parent2) {
             point2++;
         } else {
             // point1 or point2 ?? random...
-            int point = rand() % 10 + 1; // number in the range 1 to 10
+            int point = rand() % 10 + 1;  // number in the range 1 to 10
             if (point <= 5)
                 point1--;
             else
@@ -215,36 +215,36 @@ void Genetic::crossOver(std::vector<int> &parent1, std::vector<int> &parent2) {
     // child1 receives genes of the parent2 and
     // child2 receives genes of the parent1
     for (int i = point2; i >= point1; i--) {
-        if (genes1[parent2[i]] == 0) // if the gene is not used
+        if (genes1[parent2[i]] == 0)  // if the gene is not used
         {
             child1.push_back(parent2[i]);
-            genes1[parent2[i]] = 1; // marks the gene
+            genes1[parent2[i]] = 1;  // marks the gene
         } else {
             // if the gene already is used, chooses gene that is not used
             for (auto it = genes1.begin();
                  it != genes1.end(); ++it) {
-                if (it->second == 0) // checks if is not used
+                if (it->second == 0)  // checks if is not used
                 {
                     child1.push_back(it->first);
-                    genes1[it->first] = 1; // marks as used
-                    break; // left the loop
+                    genes1[it->first] = 1;  // marks as used
+                    break;  // left the loop
                 }
             }
         }
 
-        if (genes2[parent1[i]] == 0) // if the gene is not used
+        if (genes2[parent1[i]] == 0)  // if the gene is not used
         {
             child2.push_back(parent1[i]);
-            genes2[parent1[i]] = 1; // marks the gene
+            genes2[parent1[i]] = 1;  // marks the gene
         } else {
             // if the gene already is used, chooses gene that is not used
             for (auto it = genes2.begin();
                  it != genes2.end(); ++it) {
-                if (it->second == 0) // checks if is not used
+                if (it->second == 0)  // checks if is not used
                 {
                     child2.push_back(it->first);
-                    genes2[it->first] = 1; // marks as used
-                    break; // left the loop
+                    genes2[it->first] = 1;  // marks as used
+                    break;  // left the loop
                 }
             }
         }
@@ -258,8 +258,8 @@ void Genetic::crossOver(std::vector<int> &parent1, std::vector<int> &parent2) {
     }
 
     // mutation
-    int mutation = rand() % 100 + 1; // random number in [1,100]
-    if (mutation <= mutation_rate) { // checks if the random number <= mutation rate
+    int mutation = rand() % 100 + 1;  // random number in [1,100]
+    if (mutation <= mutation_rate) {  // checks if the random number <= mutation rate
         // makes a mutation: change of two genes
 
         int index_gene1, index_gene2;
@@ -283,21 +283,21 @@ void Genetic::crossOver(std::vector<int> &parent1, std::vector<int> &parent2) {
     // checks if is a valid solution and not exists in the population
     if (total_cost_child1 != -1 && !existsChromosome(child1)) {
         // add child in the population
-        insertBinarySearch(child1, total_cost_child1); // uses binary search to insert
-        real_size_population++; // increments the real_size_population
+        insertBinarySearch(child1, total_cost_child1);  // uses binary search to insert
+        real_size_population++;  // increments the real_size_population
     }
 
     // checks again...
     if (total_cost_child2 != -1 && !existsChromosome(child2)) {
         // add child in the population
-        insertBinarySearch(child2, total_cost_child2); // uses binary search to insert
-        real_size_population++; // increments the real_size_population
+        insertBinarySearch(child2, total_cost_child2);  // uses binary search to insert
+        real_size_population++;  // increments the real_size_population
     }
 }
 
 // runs the genetic algorithm
 TCPResponse Genetic::run() {
-    initialPopulation(); // gets initial population
+    initialPopulation();  // gets initial population
 
     std::vector<double> cost_track;
     for (int i = 0; i < generations; i++) {
@@ -338,17 +338,17 @@ TCPResponse Genetic::run() {
                 }
             } else if (diff_population == 1) {
                 if (real_size_population > size_population) {
-                    population.pop_back(); // removes the worst parent of the population
-                    real_size_population--; // decrements the real_size_population in the unit
+                    population.pop_back();  // removes the worst parent of the population
+                    real_size_population--;  // decrements the real_size_population in the unit
                 }
             }
-        } else { // population contains only 1 parent
+        } else {  // population contains only 1 parent
             // applying crossover in the parent
             crossOver(population[0].first, population[0].first);
 
             if (real_size_population > size_population) {
-                population.pop_back(); // removes the worst parent of the population
-                real_size_population--; // decrements the real_size_population in the unit
+                population.pop_back();  // removes the worst parent of the population
+                real_size_population--;  // decrements the real_size_population in the unit
             }
         }
 
@@ -356,7 +356,7 @@ TCPResponse Genetic::run() {
     }
 
     if (show_population) {
-        showPopulation(); // shows the population
+        showPopulation();  // shows the population
     }
 
     std::vector<int> result = population[0].first;
