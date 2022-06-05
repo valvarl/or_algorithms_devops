@@ -1,0 +1,7 @@
+data,cost dependency,cost,"time, s"
+a280,a280.png,2818.62,11.3691
+att48,att48.png,43076.8,1.55692
+ch150,ch150.png,25949.7,6.18817
+fl417,fl417.png,44256.6,21.7564
+bays29,bays29.png,2066.0,0.891759
+gr17,gr17.png,2085.0,0.508713

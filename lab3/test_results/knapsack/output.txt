@@ -1,0 +1,8 @@
+data,price dependency,weight dependency,price,weight,time
+p01,value_track1.png,weight_track1.png,309,165,0.000366
+p02,value_track2.png,weight_track2.png,51,26,0.000357
+p03,value_track3.png,weight_track3.png,150,190,0.00031
+p04,value_track4.png,weight_track4.png,107,50,0.000315
+p05,value_track5.png,weight_track5.png,900,104,0.000338
+p06,value_track6.png,weight_track6.png,1721,168,0.000321
+p07,value_track7.png,weight_track7.png,1458,749,0.000364
