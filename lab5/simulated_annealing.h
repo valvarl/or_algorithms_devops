@@ -1,17 +1,17 @@
-#ifndef OR_ALGORITHMS_SIMULATED_ANNEALING_H
-#define OR_ALGORITHMS_SIMULATED_ANNEALING_H
+#ifndef LAB5_SIMULATED_ANNEALING_H_
+#define LAB5_SIMULATED_ANNEALING_H_
 
 #include <vector>
 #include <algorithm>
 #include <utility>
 #include <limits>
 #include <random>
+#include <set>
 
 using matrix = std::vector<std::vector<int>>;
 
 std::vector<std::vector<double>> get_part_similarity(const matrix &data,
                                                      int num_machines, int num_parts) {
-
     auto part_similarity = std::vector<std::vector<double>>(num_parts, std::vector<double>(num_parts));
     std::vector<double> median;
     median.reserve(num_parts * (num_parts - 1));
@@ -45,7 +45,6 @@ std::vector<std::vector<double>> get_part_similarity(const matrix &data,
 
 std::vector<std::set<int>> init_solution(const matrix &data,
                                         int num_machines, int num_parts, int num_cells) {
-
     // считаем матрицу схожести деталей
     auto part_similarity = get_part_similarity(data, num_machines, num_parts);
 
@@ -70,7 +69,7 @@ std::vector<std::set<int>> init_solution(const matrix &data,
         while (true) {
             double max_similarity = 0;
             int similar_part;
-            for (int part: cells[temp_cell]) {
+            for (int part : cells[temp_cell]) {
                 for (int j = 0; j < num_parts; ++j) {
                     if (j != part && cells[temp_cell].find(j) == cells[temp_cell].end()) {
                         if (part_similarity[part][j] > max_similarity && used.find(j) == used.end()) {
@@ -101,12 +100,11 @@ std::vector<std::set<int>> init_solution(const matrix &data,
 
 std::pair<matrix, matrix> get_xy(const matrix &data, int num_machines,
                                  int num_parts, int num_cells, std::vector<std::set<int>> cells) {
-
     auto x = matrix(num_machines, std::vector<int>(num_cells));
     auto y = matrix(num_parts, std::vector<int>(num_cells));
 
     for (int i = 0; i < num_cells; ++i) {
-        for (int j: cells[i]) {
+        for (int j : cells[i]) {
             y[j][i] = 1;
         }
     }
@@ -124,7 +122,7 @@ std::pair<matrix, matrix> get_xy(const matrix &data, int num_machines,
 
         for (int i = 0; i < num_cells; ++i) {
             int v = 0;
-            for (int j: cells[i]) {
+            for (int j : cells[i]) {
                 if (data[k][j] == 0) {
                     v++;
                 }
@@ -235,7 +233,7 @@ struct SAResponse {
 };
 
 SAResponse simulated_annealing(const std::vector<std::vector<int>> &data, int num_machines, int num_parts,
-                         double T_0, double T_f, double alpha, int L, int D, int check=4) {
+                         double T_0, double T_f, double alpha, int L, int D, int check = 4) {
     int C = 2, C_(C);
 
     double best_cost = 0;
@@ -308,4 +306,4 @@ SAResponse simulated_annealing(const std::vector<std::vector<int>> &data, int nu
     }
 }
 
-#endif //OR_ALGORITHMS_SIMULATED_ANNEALING_H
+#endif  // LAB5_SIMULATED_ANNEALING_H_
